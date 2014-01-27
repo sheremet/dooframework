@@ -275,6 +275,14 @@ class Doo{
             self::$_cache['memcache'] = new DooMemCache(Doo::conf()->MEMCACHE);
             return self::$_cache['memcache'];
         }
+        else if($cacheType=='memcached'){
+          if(isset(self::$_cache['memcached']))
+            return self::$_cache['memcached'];
+
+          self::loadCore('cache/DooMemCached');
+          self::$_cache['memcached'] = new DooMemCached(Doo::conf()->MEMCACHED);
+          return self::$_cache['memcached'];
+        }
     }
 
     /**
